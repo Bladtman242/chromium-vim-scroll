@@ -11,24 +11,41 @@ var watchMap = {
     },
 };
 
-document.addEventListener("keypress", function(e){
-    var key = String.fromCharCode(e.keyCode);
-    if(key == 'j'){
-        window.scrollBy(0,50);
-    } else if(key == 'k') {
-        window.scrollBy(0,-50);
-    } else if(key == 'l') {
-        window.scrollBy(50,0);
-    } else if(key == 'h') {
-        window.scrollBy(-50,0);
-    } else if(key == 'G') {
-            window.scrollTo(window.pageXOffset,document.body.scrollHeight);
-    } else if(key == 'g') {
-        if (watchMap.contains500ms('g')){
-            window.scrollTo(window.pageXOffset,0);
-            delete watchMap['g'];
-        } else {
-            watchMap.add('g') 
+var vimScroll = {
+    eventTriggersPlugin:  function(ev) {
+        return (ev.target == document.body)
+    },
+    scrollTo: function(x,y) {
+        window.scrollTo(x,y);
+    },
+    scrollBy: function(x,y) {
+        window.scrollBy(x,y);
+    },
+    //The entrypoint of the entire extension
+    keypressHandler: function(e) {
+        if(vimScroll.eventTriggersPlugin(e)) {
+            var key = String.fromCharCode(e.keyCode);
+            if(key == 'j'){
+                scrollBy(0,50)
+            } else if(key == 'k') {
+                scrollBy(0,-50)
+            } else if(key == 'l') {
+                scrollBy(50,0)
+            } else if(key == 'h') {
+                scrollBy(-50,0)
+            } else if(key == 'G') {
+                scrollTo(window.pageXOffset,document.body.scrollHeight);
+            } else if(key == 'g') {
+                if (watchMap.contains500ms('g')){
+                    scrollTo(window.pageXOffset,0);
+                    delete watchMap['g'];
+                } else {
+                    watchMap.add('g') 
+                }
+            }
         }
     }
-})
+};
+
+//Hook up the handler. This essentially constitutes the entire extension
+document.addEventListener("keypress", vimScroll.keypressHandler)
