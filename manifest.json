@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "vim-scroll",
-  "version": "3",
+  "version": "4",
   "icons": {"128": "jk.png"},
   "content_scripts": [
     {
