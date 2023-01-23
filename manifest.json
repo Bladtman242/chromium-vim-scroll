@@ -2,11 +2,17 @@
   "manifest_version": 3,
   "name": "vim-scroll",
   "version": "4",
-  "icons": {"128": "jk.png"},
+  "icons": {
+      "128": "jk.png"
+  },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["vim-scroll.js"]
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "vim-scroll.js"
+      ]
     }
   ]
 }
