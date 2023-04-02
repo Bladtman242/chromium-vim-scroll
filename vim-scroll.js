@@ -50,4 +50,3 @@ function keypressHandler(e) {
 
 //Hook up the handler. This essentially constitutes the entire extension
 document.addEventListener("keypress", keypressHandler)
-console.log('kek')
