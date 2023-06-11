@@ -1,3 +1,12 @@
+var DEBUG = false;
+
+const originalLog = console.log;
+
+console.log = (...args) =>
+    DEBUG
+    ? originalLog(...args)
+    : undefined
+
 var watchMap = {
     add: function(k){
         watchMap[k] = Date.now();
